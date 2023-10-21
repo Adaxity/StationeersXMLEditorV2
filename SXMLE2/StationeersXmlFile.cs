@@ -1,12 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-
-public readonly struct StationeersXmlFile
+﻿public readonly struct StationeersXmlFile
 {
 	public readonly string FilePath;
 	public readonly string FileName;
@@ -31,4 +23,3 @@ public readonly struct StationeersXmlFile
 			return Path.GetFileName(fullPath);
 	}
 }
-

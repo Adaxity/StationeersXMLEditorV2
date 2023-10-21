@@ -3,12 +3,12 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.7.34202.233
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StationeersXmlEditorV2", "StationeersXmlEditorV2\StationeersXmlEditorV2.csproj", "{901BD110-1D68-4A56-90AF-26451251C54C}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{C45236E7-4DC9-4786-896A-2885380F0F81}"
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
 	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SXMLE2", "SXMLE2\SXMLE2.csproj", "{3D02E0B3-2356-4B67-AF08-063063830AB4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -16,10 +16,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{901BD110-1D68-4A56-90AF-26451251C54C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{901BD110-1D68-4A56-90AF-26451251C54C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{901BD110-1D68-4A56-90AF-26451251C54C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{901BD110-1D68-4A56-90AF-26451251C54C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3D02E0B3-2356-4B67-AF08-063063830AB4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3D02E0B3-2356-4B67-AF08-063063830AB4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3D02E0B3-2356-4B67-AF08-063063830AB4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3D02E0B3-2356-4B67-AF08-063063830AB4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
