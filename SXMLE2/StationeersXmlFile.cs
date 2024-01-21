@@ -1,25 +1,28 @@
-﻿public readonly struct StationeersXmlFile
+﻿using System.IO;
+
+public readonly struct StationeersXmlFile
 {
-	public readonly string FilePath;
-	public readonly string FileName;
-	public readonly string FileNameWithoutExtension;
-	public readonly string FilePathFromData;
+	public readonly string Path;
+	public readonly string Name;
+	public readonly string NameExt;
+	public readonly string PathFromData;
 
 	public StationeersXmlFile(string FilePath)
 	{
-		this.FilePath = FilePath;
-		this.FileName = Path.GetFileName(FilePath);
-		this.FileNameWithoutExtension = Path.GetFileNameWithoutExtension(FilePath);
-		this.FilePathFromData = ExtractPath(FilePath);
+		Path = FilePath;
+		Name = System.IO.Path.GetFileNameWithoutExtension(Path);
+		NameExt = System.IO.Path.GetFileName(Path);
+		PathFromData = ExtractDataPath(Path);
 	}
 
-	private string ExtractPath(string fullPath)
+	private string ExtractDataPath(string fullPath)
 	{
-		string directory = Path.GetDirectoryName(fullPath);
-		string parentFolder = new DirectoryInfo(directory).Name;
-		if (parentFolder.Equals("CustomPresets", StringComparison.OrdinalIgnoreCase))
-			return Path.Combine(parentFolder, fullPath.Substring(directory.Length + 1));
-		else
-			return Path.GetFileName(fullPath);
+		string path = System.IO.Path.GetRelativePath(SXMLE2.exeDir + "\\rocketstation_Data\\StreamingAssets\\", fullPath);
+		if (path.StartsWith("Data"))
+			path = path.Replace("Data\\", "");
+		if (path.StartsWith("DATA_ORIGINAL"))
+			path = path.Replace("DATA_ORIGINAL\\", "");
+		path = path.Replace(NameExt, "");
+		return path;
 	}
 }

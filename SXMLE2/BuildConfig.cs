@@ -1,6 +1,9 @@
 ﻿[Serializable]
 public class BuildConfig
 {
+	[NonSerialized]
+	public string CONFIG_NAME;
+
 	public int CONFIG_VERSION;
 
 	public float CRAFTING_INGREDIENTS;

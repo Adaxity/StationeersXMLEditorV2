@@ -2,8 +2,8 @@
 
 public class StationeersXMLEditor : XmlDocument
 {
-	private const string DataPath = @"rocketstation_Data\StreamingAssets\Data";
-	private const string DataBackupPath = @"rocketstation_Data\StreamingAssets\DATA_ORIGINAL";
+	public const string DataPath = @"rocketstation_Data\StreamingAssets\Data";
+	public const string DataBackupPath = @"rocketstation_Data\StreamingAssets\DATA_ORIGINAL";
 
 	public readonly string gamePath;
 	public readonly string gameDataPath;
@@ -26,9 +26,7 @@ public class StationeersXMLEditor : XmlDocument
 		this.gameDataBackupPath = Path.Combine(gamePath, DataBackupPath);
 
 		if (!Directory.Exists(gameDataBackupPath))
-			Directory.CreateDirectory(Path.Combine(gameDataBackupPath));
-		if (!Directory.Exists(Path.Combine(gameDataBackupPath, "CustomPresets")))
-			Directory.CreateDirectory(Path.Combine(gameDataBackupPath, "CustomPresets"));
+			SXMLE2.RecursiveCreateDirectory(Path.Combine(gameDataBackupPath));
 
 		BackupOriginalXmlFiles();
 
@@ -37,13 +35,16 @@ public class StationeersXMLEditor : XmlDocument
 
 	private List<StationeersXmlFile> LoadXmlFilesFromPath(string path)
 	{
+		List<string> paths = FindAllPaths(path);
 		List<StationeersXmlFile> files = new();
-		foreach (string Directory in Directory.GetDirectories(path))
-			foreach (StationeersXmlFile file in LoadXmlFilesFromPath(Directory))
-				files.Add(file);
-		foreach (string XmlFilePath in Directory.GetFiles(path))
-			if (Path.GetExtension(XmlFilePath) == ".xml")
-				files.Add(new StationeersXmlFile(XmlFilePath));
+
+		foreach (string dir in paths)
+			foreach (string XmlFilePath in Directory.GetFiles(dir))
+				if (Path.GetExtension(XmlFilePath) == ".xml")
+					files.Add(new StationeersXmlFile(XmlFilePath));
+
+
+
 		return files;
 	}
 
@@ -53,30 +54,53 @@ public class StationeersXMLEditor : XmlDocument
 		int i = 0;
 		foreach (StationeersXmlFile xmlFile in LoadXmlFilesFromPath(gameDataPath))
 		{
-			Load(xmlFile.FilePath);
+			string combinedPath = Path.Combine(gameDataBackupPath + $"\\{xmlFile.PathFromData}");
+
+			SXMLE2.RecursiveCreateDirectory(combinedPath);
+		}
+
+		foreach (StationeersXmlFile xmlFile in LoadXmlFilesFromPath(gameDataPath))
+		{
+			string combinedPath;
+			if (xmlFile.PathFromData == "")
+				combinedPath = gameDataBackupPath;
+			else
+				combinedPath = Path.Combine(gameDataBackupPath, xmlFile.PathFromData);
+
+			Load(xmlFile.Path);
 			if (!ElementExists("stationeers_edited"))
 			{
+				Save($"{combinedPath}\\{xmlFile.NameExt}");
 				i++;
 				Log($"Backed up", true);
-				Save(Path.Combine(gameDataBackupPath, xmlFile.FilePathFromData));
 			}
 			else
 			{
 				Log($"Not original, skipping...", true);
 			}
+			Console.WriteLine($"{i} original files have been backed up.\n");
 		}
-		Console.WriteLine($"{i} original files have been backed up.\n");
+
 	}
 
 	public void Log(string change, bool includeFileName = false)
 	{
 		if (includeFileName)
-			Console.WriteLine($"{OpenFile.FilePathFromData}: {change}");
+			Console.WriteLine($"{OpenFile.PathFromData}: {change}");
 		else
 			Console.WriteLine($"\t{change}");
 	}
 
+	static List<string> FindAllPaths(string directory)
+	{
+		List<string> allDirectories = new List<string>();
+		allDirectories.Add(directory);
+		foreach (string subdirectory in Directory.GetDirectories(directory))
+			allDirectories.AddRange(FindAllPaths(subdirectory));
+		return allDirectories;
+	}
+
 	public bool ElementExists(string ElementName) => GetElementsByTagName(ElementName).Count > 0;
 
-	public bool IsWhitelisted(string[] whitelist) => whitelist.Contains(OpenFile.FileNameWithoutExtension);
+	public bool IsWhitelisted(string[] whitelist) => whitelist.Contains(OpenFile.Name);
 }

@@ -1,14 +1,15 @@
 internal static class Program
 {
-	/// <summary>
-	///  The main entry point for the application.
-	/// </summary>
 	[STAThread]
 	private static void Main()
 	{
-		// To customize application configuration such as set high DPI settings or default font,
-		// see https://aka.ms/applicationconfiguration.
 		ApplicationConfiguration.Initialize();
+
+#if DEBUG
+		SXMLE2.exeDir = @"C:\Program Files (x86)\Steam\steamapps\common\Stationeers";
+		SXMLE2.configDir = SXMLE2.exeDir + @"\SXMLE_Configs";
+#endif
+
 		if (SXMLE2.IsInCorrectDirectory)
 			Application.Run(new SXMLE2());
 		else
