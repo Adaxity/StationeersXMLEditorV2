@@ -20,6 +20,7 @@
 	public static string Build()
 	{
 		documentationText = "";
+		Nl("Danek je gay");
 		Nl("SXMLE2 is a simple mass xml editor for Stationeers. It is currently in development, so expect bugs and changes. If you encounter any bugs, have suggestions or feedback, please contact me on Discord (username is decxi).");
 		El();
 		El();
