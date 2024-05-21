@@ -144,7 +144,7 @@ public partial class SXMLE2 : Form
 					switch (node.Name)
 					{
 						case "Time":
-							value = Math.Clamp(value * OpenConfig.CRAFTING_TIME, 0.25f, 999f);
+							value = Math.Clamp(value * OpenConfig.CRAFTING_TIME, 0.01f, float.MaxValue);
 							break;
 
 						case "Energy":
