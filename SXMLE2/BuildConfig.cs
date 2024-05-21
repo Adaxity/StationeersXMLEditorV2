@@ -27,7 +27,7 @@ public class BuildConfig
 
 	public static readonly BuildConfig _vanilla = new BuildConfig()
 	{
-		CONFIG_VERSION = SXMLE2.VERSION,
+		CONFIG_VERSION = SXMLE2.CONFIGVERSION,
 		CRAFTING_INGREDIENTS = 1f,
 		CRAFTING_ENERGY = 1f,
 		CRAFTING_TIME = 1f,
@@ -46,7 +46,7 @@ public class BuildConfig
 
 	public static readonly BuildConfig _default = new BuildConfig()
 	{
-		CONFIG_VERSION = SXMLE2.VERSION,
+		CONFIG_VERSION = SXMLE2.CONFIGVERSION,
 		CRAFTING_INGREDIENTS = 1f,
 		CRAFTING_ENERGY = 1f,
 		CRAFTING_TIME = 0.1f,
@@ -54,12 +54,12 @@ public class BuildConfig
 		SMELTING_ENERGY = 0.1f,
 		SMELTING_RANGE = 2f,
 		SMELTING_SUPERALLOY_OUTPUT = 4f,
-		MINING_ORE_DROPQUANTITY = 2f,
-		MINING_COAL_DROPQUANTITY = 2f,
-		MINING_ICE_DROPQUANTITY = 5f,
-		MINING_VEIN_SIZE = 2f,
-		MINING_TIME = 0f,
-		WORLD_ORE_DENSITY = 2f,
+		MINING_ORE_DROPQUANTITY = 5f,
+		MINING_COAL_DROPQUANTITY = 5f,
+		MINING_ICE_DROPQUANTITY = 10f,
+		MINING_VEIN_SIZE = 1f,
+		MINING_TIME = 5f,
+		WORLD_ORE_DENSITY = 1f,
 		EXCLUDE_VEINS = new string[] { "Geyser", "Uranium" }
 	};
 }

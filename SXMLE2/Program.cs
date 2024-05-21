@@ -4,15 +4,9 @@ internal static class Program
 	private static void Main()
 	{
 		ApplicationConfiguration.Initialize();
-
-#if DEBUG
-		SXMLE2.exeDir = @"C:\Program Files (x86)\Steam\steamapps\common\Stationeers\";
-		SXMLE2.configDir = SXMLE2.exeDir + @"\SXMLE_Configs\";
-#endif
-
-		if (!SXMLE2.IsInCorrectDirectory)
+		if (SXMLE2.IsInCorrectDirectory)
 			Application.Run(new SXMLE2());
 		else
-			MessageBox.Show($"Please put the .exe file into your Stationeers folder.\n\nCurrently in: {SXMLE2.exeDir} ({Path.GetFileNameWithoutExtension(SXMLE2.exeDir)}, {SXMLE2.exeDir})", "Incorrect file location", MessageBoxButtons.OK);
+			MessageBox.Show($"Please put 'SXMLE2.exe' into your Stationeers folder.\n(Into the same folder as 'rocketstation.exe')\n\nCurrently in: '{SXMLE2.exeDir}'", "Incorrect file location", MessageBoxButtons.OK);
 	}
 }
