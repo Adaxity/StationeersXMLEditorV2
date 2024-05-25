@@ -120,7 +120,7 @@ public partial class SXMLE2 : Form
 					if (i > 20)
 					{
 						case "Time":
-							value = Math.Clamp(value * OpenConfig.CRAFTING_TIME, 0.001f, float.MaxValue);
+							value = Math.Clamp(value * OpenConfig.CRAFTING_TIME, 0.01f, float.MaxValue);
 							break;
 
 						case "Energy":
