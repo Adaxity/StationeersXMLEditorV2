@@ -15,6 +15,7 @@ public partial class SXMLE2 : Form
 	public static string exeDir =
 #if DEBUG
 		"C:\\Program Files (x86)\\Steam\\steamapps\\common\\Stationeers";
+
 #else
 		AppDomain.CurrentDomain.BaseDirectory;
 #endif
@@ -56,7 +57,6 @@ public partial class SXMLE2 : Form
 		using (StreamWriter writer = new StreamWriter(Path.Combine(configDir, "vanilla.xml")))
 			configSerializer.Serialize(writer, BuildConfig._vanilla);
 
-
 		SelectConfig("default.xml");
 	}
 
@@ -97,7 +97,6 @@ public partial class SXMLE2 : Form
 					}
 					text += $"{node.Name}: {node.InnerText}\n";
 				}
-
 
 			ConfigSettingsBox.Text = text;
 		}
@@ -144,7 +143,7 @@ public partial class SXMLE2 : Form
 					switch (node.Name)
 					{
 						case "Time":
-							value = Math.Clamp(value * OpenConfig.CRAFTING_TIME, 0.01f, float.MaxValue);
+							value = Math.Clamp(value * OpenConfig.CRAFTING_TIME, 0.001f, float.MaxValue);
 							break;
 
 						case "Energy":
@@ -291,5 +290,3 @@ public partial class SXMLE2 : Form
 
 	private void HelpButton_Click(object sender, EventArgs e) => DumbJoke.Make(HelpButton);
 }
-
-
