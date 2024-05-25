@@ -9,7 +9,7 @@ public class StationeersXMLEditor : XmlDocument
 	public readonly string gameDataPath;
 	public readonly string gameDataBackupPath;
 
-	public List<StationeersXmlFile> XmlFiles = new();
+	public List<StationeersXmlFile> OriginalXmlFiles = new();
 
 	public StationeersXmlFile OpenFile
 	{
@@ -30,7 +30,7 @@ public class StationeersXMLEditor : XmlDocument
 
 		BackupOriginalXmlFiles();
 
-		XmlFiles = LoadXmlFilesFromPath(gameDataBackupPath);
+		OriginalXmlFiles = LoadXmlFilesFromPath(gameDataBackupPath);
 	}
 
 	private List<StationeersXmlFile> LoadXmlFilesFromPath(string path)
@@ -42,8 +42,6 @@ public class StationeersXMLEditor : XmlDocument
 			foreach (string XmlFilePath in Directory.GetFiles(dir))
 				if (Path.GetExtension(XmlFilePath) == ".xml")
 					files.Add(new StationeersXmlFile(XmlFilePath));
-
-
 
 		return files;
 	}
@@ -80,7 +78,6 @@ public class StationeersXMLEditor : XmlDocument
 			}
 			Console.WriteLine($"{i} original files have been backed up.\n");
 		}
-
 	}
 
 	public void Log(string change, bool includeFileName = false)
@@ -91,7 +88,7 @@ public class StationeersXMLEditor : XmlDocument
 			Console.WriteLine($"\t{change}");
 	}
 
-	static List<string> FindAllPaths(string directory)
+	private static List<string> FindAllPaths(string directory)
 	{
 		List<string> allDirectories = new List<string>();
 		allDirectories.Add(directory);
